@@ -4,11 +4,16 @@ import com.autoparts.AutoParts.converter.make.MakeConverter;
 import com.autoparts.AutoParts.dto.make.MakeRequest;
 import com.autoparts.AutoParts.entity.Make;
 import com.autoparts.AutoParts.repository.make.MakeRepository;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -56,6 +61,25 @@ public class MakeServiceImpl implements MakeService {
     private <T> void updateFieldIfNotNull(T newValue, Consumer<T> fieldUpdater) {
         if (newValue != null) {
             fieldUpdater.accept(newValue);
+        }
+    }
+    @Transactional
+    public void insertDataFromCsv(String csvFilePath) throws IOException {
+        try {
+            try (Reader reader = new FileReader(csvFilePath)) {
+                CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+                List<String[]> rows = csvReader.readAll();
+
+                for (String[] row : rows) {
+                    Make make = new Make();
+                    make.setName(row[0]);
+
+                    repository.save(make);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception
+            throw new RuntimeException("Error inserting data: " + e.getMessage(), e);
         }
     }
 }

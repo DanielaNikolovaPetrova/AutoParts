@@ -2,13 +2,9 @@ package com.autoparts.AutoParts.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,11 +22,11 @@ public class Part {
 
     @Column(name = "name", nullable = false)
     @NotEmpty(message = "Enter name")
-    @Max(value = 60)
+    @Size(min = 2, max = 60)
     private String name;
 
     @Column(name = "description")
-    @Max(value = 220)
+    @Size(max = 220)
     private String description;
 
     @Column(name = "price", nullable = false)

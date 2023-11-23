@@ -1,8 +1,8 @@
 package com.autoparts.AutoParts.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Entity
@@ -18,8 +18,8 @@ public class Make {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     @NotEmpty(message = "Enter name")
-    @Max(value = 60)
+    @Size(min = 2, max = 60)
     private String name;
 }

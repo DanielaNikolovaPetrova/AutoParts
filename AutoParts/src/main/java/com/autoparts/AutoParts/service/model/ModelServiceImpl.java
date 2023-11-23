@@ -1,28 +1,36 @@
 package com.autoparts.AutoParts.service.model;
 
 import com.autoparts.AutoParts.dto.model.ModelRequest;
+import com.autoparts.AutoParts.entity.Make;
 import com.autoparts.AutoParts.entity.Model;
+import com.autoparts.AutoParts.repository.make.MakeRepository;
 import com.autoparts.AutoParts.repository.model.ModelRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Consumer;
 
 @Service
 public class ModelServiceImpl implements ModelService {
     private final ModelRepository repository;
+    private final MakeRepository makeRepository;
 
-    public ModelServiceImpl(ModelRepository repository) {
+    public ModelServiceImpl(ModelRepository repository, MakeRepository makeRepository) {
         this.repository = repository;
+        this.makeRepository = makeRepository;
     }
 
     @Override
     public Model addModel(@Valid ModelRequest request) {
+        Make make = makeRepository.findById(request.getMake().getId()).orElseThrow();
         Model model = new Model();
         model.setName(request.getName());
-        model.setMake(request.getMake());
+        model.setMake(make);
         model.setParts(request.getParts());
         return repository.save(model);
     }
@@ -30,6 +38,20 @@ public class ModelServiceImpl implements ModelService {
     @Override
     public Optional<Model> findModelById(Long id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public List<Model> findModels(String make) {
+        List<Model> allModels = repository.findAll();
+        List<Model> makeModels = new ArrayList<>();
+        if(Objects.nonNull(make)){
+            for(Model model: allModels){
+                if(model.getMake().getName().equals(make)){
+                    makeModels.add(model);
+                }
+            }
+            return makeModels;
+        } else {return allModels;}
     }
 
     @Override

@@ -12,6 +12,8 @@ public interface PartService {
 
     List<Part> allParts();
 
+    List<Part> findPartsByCategory(String category, String model);
+
     List<Part> findPartsByName(String name);
 
     Part updatePart(PartRequest request, Long id);

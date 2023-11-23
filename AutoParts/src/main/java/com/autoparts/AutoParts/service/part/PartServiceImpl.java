@@ -5,8 +5,11 @@ import com.autoparts.AutoParts.entity.Part;
 import com.autoparts.AutoParts.repository.part.PartRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 @Service
@@ -18,6 +21,7 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
+    @Transactional
     public Part addPart(PartRequest request) {
         Part part = new Part();
         part.setName(request.getName());
@@ -42,8 +46,38 @@ public class PartServiceImpl implements PartService {
     }
 
     @Override
+    public List<Part> findPartsByCategory(String category, String model) {
+        List<Part> allParts = repository.findAll();
+        List<Part> categoryParts = new ArrayList<>();
+        List<Part> categoryAndModelParts = new ArrayList<>();
+        if(Objects.nonNull(category)){
+            for(Part part: allParts){
+                if(part.getPartCategory().getName().equals(category)){
+                    categoryParts.add(part);
+                }
+            }
+            if(Objects.nonNull(model)){
+                for(Part part: categoryParts){
+                    if(part.getModels().iterator().next().getName().equals(model)){
+                        categoryAndModelParts.add(part);
+                    }
+                }
+                return categoryAndModelParts;
+            }
+            return categoryParts;
+        } else {return null;}
+    }
+
+    @Override
     public List<Part> findPartsByName(String name) {
-        return null;
+        List<Part> allParts = repository.findAll();
+        List<Part> selectedParts = new ArrayList<>();
+        for (Part part: allParts){
+            if(part.getName().equals(name.toLowerCase())){
+                selectedParts.add(part);
+            }
+        }
+        return selectedParts;
     }
 
     @Override

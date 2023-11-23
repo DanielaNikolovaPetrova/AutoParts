@@ -3,6 +3,7 @@ package com.autoparts.AutoParts.service.make;
 import com.autoparts.AutoParts.dto.make.MakeRequest;
 import com.autoparts.AutoParts.entity.Make;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +17,6 @@ public interface MakeService {
     Make updateMake(MakeRequest request, Long id);
 
     void deleteMake(Long id);
+
+    void insertDataFromCsv(String csvFilePath) throws IOException;
 }
