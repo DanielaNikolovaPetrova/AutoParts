@@ -1,8 +1,8 @@
 package com.autoparts.AutoParts.controller;
 
-import com.autoparts.AutoParts.dto.part.PartRequest;
-import com.autoparts.AutoParts.entity.Part;
-import com.autoparts.AutoParts.service.part.PartService;
+import com.autoparts.AutoParts.dto.autoPart.PartRequest;
+import com.autoparts.AutoParts.entity.autoPart.Part;
+import com.autoparts.AutoParts.service.autoPart.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

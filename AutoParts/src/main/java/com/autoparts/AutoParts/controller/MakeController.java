@@ -1,8 +1,8 @@
 package com.autoparts.AutoParts.controller;
 
-import com.autoparts.AutoParts.dto.make.MakeRequest;
-import com.autoparts.AutoParts.entity.Make;
-import com.autoparts.AutoParts.service.make.MakeService;
+import com.autoparts.AutoParts.dto.autoPart.MakeRequest;
+import com.autoparts.AutoParts.entity.autoPart.Make;
+import com.autoparts.AutoParts.service.autoPart.MakeService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
