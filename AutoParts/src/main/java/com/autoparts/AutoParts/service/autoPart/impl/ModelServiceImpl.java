@@ -6,10 +6,15 @@ import com.autoparts.AutoParts.entity.autoPart.Model;
 import com.autoparts.AutoParts.repository.autoPart.MakeRepository;
 import com.autoparts.AutoParts.repository.autoPart.ModelRepository;
 import com.autoparts.AutoParts.service.autoPart.ModelService;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -70,6 +75,7 @@ public class ModelServiceImpl implements ModelService {
     public void deleteModel(Long id) {
         repository.deleteById(id);
     }
+
 
     private <T> void updateFieldIfNotNull(T newValue, Consumer<T> fieldUpdater) {
         if (newValue != null) {

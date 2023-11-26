@@ -29,7 +29,7 @@ public class Model {
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "makes")
+    @JoinColumn(name = "make_id")
     private Make make;
 
     @JsonIgnore

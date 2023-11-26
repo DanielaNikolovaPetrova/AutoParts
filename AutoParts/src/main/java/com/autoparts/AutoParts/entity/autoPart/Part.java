@@ -35,7 +35,7 @@ public class Part {
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "part_categories")
+    @JoinColumn(name = "part_category_id")
     private PartCategory partCategory;
 
     @ManyToMany

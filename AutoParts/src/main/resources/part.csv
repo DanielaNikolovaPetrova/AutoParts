@@ -1,0 +1,5 @@
+description,name,price,part_category_id 
+part,engine part 1,145,1
+part,engine part 2,34,1
+part,brake part 1,245,2
+part,brake part 2,67,2

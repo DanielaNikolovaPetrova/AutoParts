@@ -78,7 +78,7 @@ public class MakeServiceImpl implements MakeService {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace(); // Log the exception
+            e.printStackTrace();
             throw new RuntimeException("Error inserting data: " + e.getMessage(), e);
         }
     }

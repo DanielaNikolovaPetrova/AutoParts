@@ -18,7 +18,7 @@ import java.util.List;
 public class MakeController {
     @Autowired
     MakeService makeService;
-    @PostMapping("/insert-data")
+    @PostMapping("auth/insert-data")
     public ResponseEntity<String> insertData(@RequestParam String csvFilePath) {
         try {
             makeService.insertDataFromCsv(csvFilePath);

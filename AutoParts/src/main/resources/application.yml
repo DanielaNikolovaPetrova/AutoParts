@@ -4,11 +4,11 @@ spring:
     include-message: always
     include-binding-errors: always
   datasource:
-    url: jdbc:mysql://localhost:3306/auto_parts?createDatabaseIfNotExist=true
+    url: jdbc:mysql://localhost:3306/auto_partsDB?createDatabaseIfNotExist=true
     application:
       yml:
-    username: root
-    password: root
+    username: *
+    password: *
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
