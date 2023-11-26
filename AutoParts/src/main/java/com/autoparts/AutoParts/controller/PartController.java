@@ -15,25 +15,25 @@ import java.util.List;
 public class PartController {
     @Autowired
     PartService service;
-    @GetMapping("/all-parts")
+    @GetMapping("/auth/all-parts")
     public ResponseEntity<List<Part>> findAllParts(){
         List<Part> allParts = service.allParts();
         return ResponseEntity.ok(allParts);
     }
 
-    @GetMapping("/part-by-id/{id}")
+    @GetMapping("/auth/part-by-id/{id}")
     public ResponseEntity<Part> findPartById(@PathVariable Long id){
         return ResponseEntity.ok(service.findPartById(id));
     }
 
-    @GetMapping("/parts-by-category")
+    @GetMapping("/auth/parts-by-category")
     public ResponseEntity<List<Part>> findPartsByCategory(
             @RequestParam ("category") String category,
             @RequestParam (value = "model", required = false) String model){
         return ResponseEntity.ok(service.findPartsByCategory(category, model));
     }
 
-    @GetMapping("/parts-by-name")
+    @GetMapping("/auth/parts-by-name")
     public ResponseEntity<List<Part>> findPartsByName(@RequestParam ("name") String name){
         return ResponseEntity.ok(service.findPartsByName(name));
     }

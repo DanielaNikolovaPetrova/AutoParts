@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Length;
 public class UserRequest {
     @NotBlank
     @Length(min=3, message = "Username should contain at least 3 characters")
-    private String userName;
+    private String username;
 
     @NotBlank
     @Length(min = 8, message = "Password should contains at least 8 characters")

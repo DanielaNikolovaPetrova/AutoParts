@@ -27,7 +27,7 @@ public class MakeController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error inserting data");
         }
     }
-    @GetMapping("/find-all-makes")
+    @GetMapping("/auth/find-all-makes")
     public ResponseEntity<List<Make>> findAllMakes(){
         List<Make> allMakes = makeService.allMakes();
         return ResponseEntity.status(HttpStatus.FOUND).body(allMakes);

@@ -18,7 +18,7 @@ public class ModelController {
     @Autowired
     ModelService service;
 
-    @GetMapping("/find-models")
+    @GetMapping("/auth/find-models")
     public ResponseEntity<List<Model>> findModels(@RequestParam (value = "make", required = false) String make){
         return ResponseEntity.ok(service.findModels(make));
     }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class UserConverter {
     public User toUser(UserRequest request){
         User user = User.builder()
-                .userName(request.getUserName())
+                .username(request.getUsername())
                 .userRole(request.getUserRole())
                 .build();
         return user;
