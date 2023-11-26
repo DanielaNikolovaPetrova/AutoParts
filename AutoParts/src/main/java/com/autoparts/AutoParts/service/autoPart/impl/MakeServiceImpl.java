@@ -31,8 +31,7 @@ public class MakeServiceImpl implements MakeService {
 
     @Override
     public Make addMake(@Valid MakeRequest request) {
-        Make make = new Make();
-        make.setName(request.getName());
+        Make make = converter.toMake(request);
         return repository.save(make);
     }
 
